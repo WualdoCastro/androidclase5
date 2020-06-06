@@ -16,8 +16,9 @@ import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(
                 R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                drawer, toolbar, R.string.drawer_open, R.string. drawer_close);
+                drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(
@@ -84,11 +85,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu1, menu);
         return true; /** true -> el menú ya está visible */
     }
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.accion_compartir) {
             Intent paramView;
@@ -121,10 +125,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onOptionsItemSelected(item);
     }
+
+
     public void btnderecha(View view) {
-        Toast.makeText(this, "Se pulso el floating button de la derecha "+ view.getTag(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Se pulso el floating button de la derecha " + view.getTag(), Toast.LENGTH_LONG).show();
     }
+
     public void btnizquierda(View view) {
-        Toast.makeText(this, "Se pulso el floating button de la izquierda "+ view.getTag(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Se pulso el floating button de la izquierda " + view.getTag(), Toast.LENGTH_LONG).show();
+    }
+
+    public void btntag(View view) {
+        if(view.getTag().equals("fabizquierda"))
+            Toast.makeText(this, "Se pulso el floating button de la izquierda " + view.getTag(), Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this, "Se pulso el floating button de la derecha " + view.getTag(), Toast.LENGTH_LONG).show();
+
+    }
+    public void fabizquierda(View view) {
+        Snackbar.make(view, "Replace with your own action",
+                Snackbar.LENGTH_LONG).setAction("Action", null).show();
+    }
+    public void fabderecha(View view) {
+        Snackbar.make(view,"¿Estás seguro?", Snackbar.LENGTH_LONG)
+                .setAction("SI", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//tu evento
+                    }
+                })
+                .show();
     }
 }
+
